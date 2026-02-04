@@ -1,0 +1,9 @@
+Get-
+Add- 
+Read-
+Remove-
+ls
+cd
+mkdir
+New
+rm
