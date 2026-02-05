@@ -1,0 +1,22 @@
+# Lister les droits d’un fichier seulement pour votre utilisateur principal  avec get-acl.
+$acl = Get-Acl -Path "C:\users\2433177\teste.txt"
+$acl.Access | Where-Object {$_.IdentityReference -like "*$env:USERNAME"}
+
+# Récupère les listes de contrôle d'accès (ACL) du fichier script02.ps1 dans le répertoire courant.
+Get-Acl .\script02.ps1
+
+# Affiche toutes les propriétés et méthodes disponibles sur l'objet retourné par Get-Acl.
+Get-Acl .\script02.ps1 | Get-Member
+
+# Affiche le nom d'utilisateur actuel stocké dans la variable d'environnement USERNAME.
+$env:USERNAME
+
+# Filtre les ACL pour ne montrer que celles où le propriétaire est `CLIM\VotreNom`
+Get-Acl .\script02.ps1 | Where-Object Owner -EQ "CLIM\$env:USERNAME"
+
+<#
+    1. Filtre les ACL pour ne montrer que celles où le propriétaire contient le nom d'utilisateur actuel.1. `Get-Acl .\script02.ps1` - Récupère les ACL
+    2. `Where-Object Owner -Match $env:USERNAME` - Filtre : garde seulement si le propriétaire contient votre nom d'utilisateur (`-Match` utilise des expressions régulières)
+    3. `select AccessToString` - Affiche seulement la propriété AccessToString, qui contient une représentation textuelle lisible de toutes 
+#>
+Get-Acl .\script02.ps1 | Where-Object Owner -Match $env:USERNAME | select AccessToString
