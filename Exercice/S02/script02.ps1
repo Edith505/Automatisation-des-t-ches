@@ -19,4 +19,4 @@ Get-Acl .\script02.ps1 | Where-Object Owner -EQ "CLIM\$env:USERNAME"
     2. `Where-Object Owner -Match $env:USERNAME` - Filtre : garde seulement si le propriétaire contient votre nom d'utilisateur (`-Match` utilise des expressions régulières)
     3. `select AccessToString` - Affiche seulement la propriété AccessToString, qui contient une représentation textuelle lisible de toutes 
 #>
-Get-Acl .\script02.ps1 | Where-Object Owner -Match $env:USERNAME | select AccessToString
+Get-Acl .\script02.ps1 | Where-Object Owner -Match $env:USERNAME | Select-Object AccessToString
