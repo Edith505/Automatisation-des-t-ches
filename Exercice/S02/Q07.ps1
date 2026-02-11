@@ -13,8 +13,8 @@ Get-ChildItem -Path "C:\users\2433177\" -Filter "*.log" -File |
     Move-Item -Destination (Join-Path -Path $PSScriptRoot -ChildPath "archivage") -Force
 
 # correction :
-New-Item $PSScriptRoot\archivage -ItemType Directory -Force
-New-Item $PSScriptRoot\archivage\test1.log -ItemType File -Force
+New-Item $PSScriptRoot\archivage -ItemType Directory -Force | Out-Null
+New-Item $PSScriptRoot\archivage\test1.log -ItemType File -Force > $null
 New-Item $PSScriptRoot\archivage\teste2.log -ItemType File -Force | 
     ForEach-Object { $_.creationtime = "2020-11-02 12:00:00" }
 
